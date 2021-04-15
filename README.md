@@ -13,7 +13,7 @@ Fill your champion in the first box
 Fill your role in the second box  
 
 Go in Blind Qeue and press F11 while in Qeue, it will start the accepting proccess  
-**DO NOT MOVE YOUR CURSOR NOW*  
+**DO NOT MOVE YOUR CURSOR NOW**  
 *If you wanna cancel press F11 again*  
   
 Have fun ^-^  
