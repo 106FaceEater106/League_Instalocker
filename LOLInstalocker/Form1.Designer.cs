@@ -34,7 +34,7 @@ namespace LOLInstalocker
             this.label2 = new System.Windows.Forms.Label();
             this.ROLE = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.START = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -68,8 +68,9 @@ namespace LOLInstalocker
             // ROLE
             // 
             this.ROLE.Location = new System.Drawing.Point(88, 192);
+            this.ROLE.Multiline = true;
             this.ROLE.Name = "ROLE";
-            this.ROLE.Size = new System.Drawing.Size(172, 20);
+            this.ROLE.Size = new System.Drawing.Size(172, 40);
             this.ROLE.TabIndex = 5;
             // 
             // label3
@@ -78,18 +79,20 @@ namespace LOLInstalocker
             this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Location = new System.Drawing.Point(160, 176);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(29, 13);
+            this.label3.Size = new System.Drawing.Size(28, 13);
             this.label3.TabIndex = 6;
-            this.label3.Text = "Role";
+            this.label3.Text = "Text";
             // 
-            // START
+            // label4
             // 
-            this.START.Location = new System.Drawing.Point(134, 268);
-            this.START.Name = "START";
-            this.START.Size = new System.Drawing.Size(75, 23);
-            this.START.TabIndex = 7;
-            this.START.Text = "Start";
-            this.START.UseVisualStyleBackColor = true;
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Bookman Old Style", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.Location = new System.Drawing.Point(112, 286);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(117, 17);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "F11 TO START";
             // 
             // Form1
             // 
@@ -97,7 +100,7 @@ namespace LOLInstalocker
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Maroon;
             this.ClientSize = new System.Drawing.Size(350, 391);
-            this.Controls.Add(this.START);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.ROLE);
             this.Controls.Add(this.label2);
@@ -117,7 +120,7 @@ namespace LOLInstalocker
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox ROLE;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button START;
+        private System.Windows.Forms.Label label4;
     }
 }
 

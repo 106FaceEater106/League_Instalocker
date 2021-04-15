@@ -14,17 +14,20 @@ namespace LOLInstalocker
 {
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// Imports
+        /// </summary>
+        /// <param name="lpClassName"></param>
+        /// <param name="lpWindowName"></param>
+        /// <returns></returns>
         #region imports
 
-        [DllImport("USER32.DLL", CharSet = CharSet.Unicode)]
-        public static extern IntPtr FindWindow(String lpClassName, String lpWindowName);
-
-        [DllImport("USER32.DLL")]
-        public static extern bool SetForegroundWindow(IntPtr hWnd);
         [DllImport("user32.dll")]
         public static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vlc);
+
         [DllImport("user32.dll")]
         public static extern bool UnregisterHotKey(IntPtr hWnd, int id);
+
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
         public static extern void mouse_event(uint dwFlags, uint dx, uint dy, uint cButtons, uint dwExtraInfo);
 
@@ -32,48 +35,69 @@ namespace LOLInstalocker
         private const int MOUSEEVENTF_LEFTUP = 0x04;
         const int MYACTION_HOTKEY_ID = 1;
 
+        #endregion
+
         private string champion;
         private string role;
 
-        #endregion
+        /// <summary>
+        /// Initialize Form
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
             RegisterHotKey(this.Handle, MYACTION_HOTKEY_ID, 0, (int)Keys.F11);//Press F11 to get current mouse coordinates
         }
 
-        private void Start()
+        /// <summary>
+        /// Run the program
+        /// </summary>
+        private void Run()
         {
+            this.Cursor = new Cursor(Cursor.Current.Handle);
             champion = CHAMPION.Text;
             role = ROLE.Text;
-            this.Cursor = new Cursor(Cursor.Current.Handle);
 
             //Search Champ
             MoveCursor(new Point(1127, 264));
             DoMouseClick();
             CopyPaste(champion);
             Thread.Sleep(500);
+
             //Choose Champ
             MoveCursor(new Point(705, 324));
             DoMouseClick();
             Thread.Sleep(500);
+
             //Lock In
             MoveCursor(new Point(960, 768));
             DoMouseClick();
             Thread.Sleep(500);
+
             //Chat
-            MoveCursor(new Point(414, 842));
-            DoMouseClick();
-            CopyPaste(role);
-            SendKeys.Send("{ENTER}");
+            if (role != null)
+            {
+                MoveCursor(new Point(414, 842));
+                DoMouseClick();
+                CopyPaste(role);
+                SendKeys.Send("{ENTER}");
+            }
+            Clipboard.Clear();
         }
 
+        /// <summary>
+        /// Copy and paste a text
+        /// </summary>
+        /// <param name="text"></param>
         private void CopyPaste(string text)
         {
             Clipboard.SetText(text);
             SendKeys.Send("^{v}");
         }
 
+        /// <summary>
+        /// Perform a mouseclick
+        /// </summary>
         private void DoMouseClick()
         {
             uint X = (uint)Cursor.Position.X;
@@ -83,16 +107,24 @@ namespace LOLInstalocker
             mouse_event(MOUSEEVENTF_LEFTUP, X, Y, 0, 0);
         }
 
+        /// <summary>
+        /// Move Cursor to Point
+        /// </summary>
+        /// <param name="point"></param>
         private void MoveCursor(Point point)
         {
             Cursor.Position = new Point(point.X, point.Y);
         }
 
+        /// <summary>
+        /// MouseEvent
+        /// </summary>
+        /// <param name="m"></param>
         protected override void WndProc(ref Message m)
         {
             if (m.Msg == 0x0312 && m.WParam.ToInt32() == MYACTION_HOTKEY_ID)
             {
-                Start();
+                Run();
             }
             base.WndProc(ref m);
         }
