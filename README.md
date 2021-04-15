@@ -2,7 +2,7 @@
 
 A nice tool for Instalocking Champs in League
 
-##How to Use
+## How to Use
 
 Log in to League Client with window size 1280x720 on a 1920x1080 Monitor
 **DO NOT MOVE YOUR CLIENT ARROUND**
