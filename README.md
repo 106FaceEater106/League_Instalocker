@@ -6,7 +6,7 @@ A nice tool for Instalocking Champs in League
 
 * Go to releases and download the latest version
   
-* Run the .exe or build it for yourself within Visual Studio
+* Run the .exe or build the source code for yourself within Visual Studio
 
 ## How to Use  
   
