@@ -2,6 +2,12 @@
   
 A nice tool for Instalocking Champs in League  
   
+## How to Install
+
+* Go to releases and download the latest version
+  
+* Run the .exe or build it for yourself within Visual Studio
+
 ## How to Use  
   
 * Log in to League Client with window size 1280x720 on a 1920x1080 Monitor  
