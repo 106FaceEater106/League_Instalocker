@@ -1,7 +1,7 @@
 ﻿
 namespace LOLInstalocker
 {
-    partial class Form1
+    partial class InstaLocker
     {
         /// <summary>
         /// Required designer variable.
@@ -29,12 +29,14 @@ namespace LOLInstalocker
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.CHAMPION = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.ROLE = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.TIMER = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // label1
@@ -42,7 +44,7 @@ namespace LOLInstalocker
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Bookman Old Style", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(50, 60);
+            this.label1.Location = new System.Drawing.Point(14, 41);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(260, 24);
             this.label1.TabIndex = 2;
@@ -50,7 +52,7 @@ namespace LOLInstalocker
             // 
             // CHAMPION
             // 
-            this.CHAMPION.Location = new System.Drawing.Point(88, 139);
+            this.CHAMPION.Location = new System.Drawing.Point(56, 112);
             this.CHAMPION.Name = "CHAMPION";
             this.CHAMPION.Size = new System.Drawing.Size(172, 20);
             this.CHAMPION.TabIndex = 3;
@@ -59,7 +61,7 @@ namespace LOLInstalocker
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(151, 123);
+            this.label2.Location = new System.Drawing.Point(112, 96);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(54, 13);
             this.label2.TabIndex = 4;
@@ -67,7 +69,7 @@ namespace LOLInstalocker
             // 
             // ROLE
             // 
-            this.ROLE.Location = new System.Drawing.Point(88, 192);
+            this.ROLE.Location = new System.Drawing.Point(56, 165);
             this.ROLE.Multiline = true;
             this.ROLE.Name = "ROLE";
             this.ROLE.Size = new System.Drawing.Size(172, 40);
@@ -77,7 +79,7 @@ namespace LOLInstalocker
             // 
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(160, 176);
+            this.label3.Location = new System.Drawing.Point(121, 149);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(28, 13);
             this.label3.TabIndex = 6;
@@ -88,25 +90,29 @@ namespace LOLInstalocker
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Bookman Old Style", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(112, 286);
+            this.label4.Location = new System.Drawing.Point(59, 265);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(117, 17);
+            this.label4.Size = new System.Drawing.Size(165, 17);
             this.label4.TabIndex = 7;
-            this.label4.Text = "F11 TO START";
+            this.label4.Text = "F11 TO START/STOP";
             // 
-            // Form1
+            // TIMER
+            // 
+            this.TIMER.Tick += new System.EventHandler(this.TIMER_Tick);
+            // 
+            // InstaLocker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Maroon;
-            this.ClientSize = new System.Drawing.Size(350, 391);
+            this.ClientSize = new System.Drawing.Size(286, 329);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.ROLE);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.CHAMPION);
             this.Controls.Add(this.label1);
-            this.Name = "Form1";
+            this.Name = "InstaLocker";
             this.Text = "Instalocker";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -121,6 +127,7 @@ namespace LOLInstalocker
         private System.Windows.Forms.TextBox ROLE;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Timer TIMER;
     }
 }
 

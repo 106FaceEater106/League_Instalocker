@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -12,7 +13,7 @@ using System.Windows.Forms;
 
 namespace LOLInstalocker
 {
-    public partial class Form1 : Form
+    public partial class InstaLocker : System.Windows.Forms.Form
     {
         /// <summary>
         /// Imports
@@ -31,6 +32,11 @@ namespace LOLInstalocker
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
         public static extern void mouse_event(uint dwFlags, uint dx, uint dy, uint cButtons, uint dwExtraInfo);
 
+
+        [DllImport("gdi32.dll", CharSet = CharSet.Auto, SetLastError = true, ExactSpelling = true)]
+        public static extern int BitBlt(IntPtr hDC, int x, int y, int nWidth, int nHeight, IntPtr hSrcDC, int xSrc, int ySrc, int dwRop);
+
+
         private const int MOUSEEVENTF_LEFTDOWN = 0x02;
         private const int MOUSEEVENTF_LEFTUP = 0x04;
         const int MYACTION_HOTKEY_ID = 1;
@@ -39,11 +45,12 @@ namespace LOLInstalocker
 
         private string champion;
         private string role;
+        private bool running = false;
 
         /// <summary>
         /// Initialize Form
         /// </summary>
-        public Form1()
+        public InstaLocker()
         {
             InitializeComponent();
             RegisterHotKey(this.Handle, MYACTION_HOTKEY_ID, 0, (int)Keys.F11);//Press F11 to get current mouse coordinates
@@ -54,7 +61,6 @@ namespace LOLInstalocker
         /// </summary>
         private void Run()
         {
-            this.Cursor = new Cursor(Cursor.Current.Handle);
             champion = CHAMPION.Text;
             role = ROLE.Text;
 
@@ -62,23 +68,26 @@ namespace LOLInstalocker
             MoveCursor(new Point(1127, 264));
             DoMouseClick();
             CopyPaste(champion);
-            Thread.Sleep(500);
+            Thread.Sleep(720);
 
             //Choose Champ
             MoveCursor(new Point(705, 324));
+            Thread.Sleep(200);
             DoMouseClick();
-            Thread.Sleep(500);
+            Thread.Sleep(900);
 
             //Lock In
             MoveCursor(new Point(960, 768));
             DoMouseClick();
-            Thread.Sleep(500);
+            Thread.Sleep(200);
 
             //Chat
             if (role != null)
             {
                 MoveCursor(new Point(414, 842));
+                Thread.Sleep(50);
                 DoMouseClick();
+                Thread.Sleep(50);
                 CopyPaste(role);
                 SendKeys.Send("{ENTER}");
             }
@@ -100,6 +109,7 @@ namespace LOLInstalocker
         /// </summary>
         private void DoMouseClick()
         {
+            Thread.Sleep(20);
             uint X = (uint)Cursor.Position.X;
             uint Y = (uint)Cursor.Position.Y;
             mouse_event(MOUSEEVENTF_LEFTDOWN, X, Y, 0, 0);
@@ -124,9 +134,56 @@ namespace LOLInstalocker
         {
             if (m.Msg == 0x0312 && m.WParam.ToInt32() == MYACTION_HOTKEY_ID)
             {
-                Run();
+                if(running == false)
+                {
+                    running = true;
+                    this.BackColor = Color.Green;
+                    TIMER.Start();
+                    //Go to AcceptQ
+                    MoveCursor(new Point(960, 718));
+                } else
+                {
+                    running = false;
+                    this.BackColor = Color.Maroon;
+                    TIMER.Stop();
+                }
+                
             }
             base.WndProc(ref m);
+        }
+
+        Bitmap screenPixel = new Bitmap(1, 1, PixelFormat.Format32bppArgb);
+        public Color GetColorAt(Point location)
+        {
+            using (var gdest = Graphics.FromImage(screenPixel))
+            {
+                using (var gsrc = Graphics.FromHwnd(IntPtr.Zero))
+                {
+                    var hSrcDC = gsrc.GetHdc();
+                    var hDC = gdest.GetHdc();
+                    int retval = BitBlt(hDC, 0, 0, 1, 1, hSrcDC, location.X, location.Y, (int)CopyPixelOperation.SourceCopy);
+                    gdest.ReleaseHdc();
+                    gsrc.ReleaseHdc();
+                }
+            }
+
+            return screenPixel.GetPixel(0, 0);
+        }
+
+        private void TIMER_Tick(object sender, EventArgs e)
+        {
+            var pixel = GetColorAt(new Point(765,190));
+
+            DoMouseClick();
+
+            if (pixel.R == 0 && pixel.G == 0 && pixel.B == 0) {
+
+                TIMER.Stop();
+                running = false;
+                this.BackColor = Color.Maroon;
+                Thread.Sleep(650);
+                Run();
+            }
         }
     }
 }
