@@ -133,22 +133,31 @@ namespace LOLInstalocker
         /// <param name="m"></param>
         protected override void WndProc(ref Message m)
         {
+            switch (m.Msg)
+            {
+                case 0x84:
+                    base.WndProc(ref m);
+                    if ((int)m.Result == 0x1)
+                        m.Result = (IntPtr)0x2;
+                    return;
+            }
+            base.WndProc(ref m);
+
             if (m.Msg == 0x0312 && m.WParam.ToInt32() == MYACTION_HOTKEY_ID)
             {
                 if(running == false)
                 {
                     running = true;
-                    OnOff.BackColor = Color.Green;
+                    OnOff.BackColor = Color.FromArgb(0, 192, 0);
                     TIMER.Start();
                     //Go to AcceptQ
                     MoveCursor(new Point(960, 718));
                 } else
                 {
                     running = false;
-                    OnOff.BackColor = Color.Maroon;
+                    OnOff.BackColor = Color.FromArgb(192, 0, 0);
                     TIMER.Stop();
                 }
-                
             }
             base.WndProc(ref m);
         }
