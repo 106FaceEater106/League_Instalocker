@@ -53,6 +53,8 @@ namespace LOLInstalocker
         public InstaLocker()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point(12, 160);
             RegisterHotKey(this.Handle, MYACTION_HOTKEY_ID, 0, (int)Keys.F11);//Press F11 to get current mouse coordinates
         }
 
@@ -136,14 +138,14 @@ namespace LOLInstalocker
                 if(running == false)
                 {
                     running = true;
-                    this.BackColor = Color.Green;
+                    OnOff.BackColor = Color.Green;
                     TIMER.Start();
                     //Go to AcceptQ
                     MoveCursor(new Point(960, 718));
                 } else
                 {
                     running = false;
-                    this.BackColor = Color.Maroon;
+                    OnOff.BackColor = Color.Maroon;
                     TIMER.Stop();
                 }
                 
@@ -183,6 +185,11 @@ namespace LOLInstalocker
                 Thread.Sleep(300);
                 Run();
             }
+        }
+
+        private void Close_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
