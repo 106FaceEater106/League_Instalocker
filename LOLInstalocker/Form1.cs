@@ -68,26 +68,25 @@ namespace LOLInstalocker
             MoveCursor(new Point(1127, 264));
             DoMouseClick();
             CopyPaste(champion);
-            Thread.Sleep(720);
+            Thread.Sleep(10);
 
             //Choose Champ
             MoveCursor(new Point(705, 324));
-            Thread.Sleep(200);
-            DoMouseClick();
-            Thread.Sleep(900);
+            for (var i = 0; i < 10; i++) { DoMouseClick(); }
+            Thread.Sleep(100);
 
             //Lock In
             MoveCursor(new Point(960, 768));
             DoMouseClick();
-            Thread.Sleep(200);
+            Thread.Sleep(10);
 
             //Chat
             if (role != null)
             {
                 MoveCursor(new Point(414, 842));
-                Thread.Sleep(50);
+                Thread.Sleep(10);
                 DoMouseClick();
-                Thread.Sleep(50);
+                Thread.Sleep(10);
                 CopyPaste(role);
                 SendKeys.Send("{ENTER}");
             }
@@ -110,8 +109,8 @@ namespace LOLInstalocker
         private void DoMouseClick()
         {
             Thread.Sleep(20);
-            uint X = (uint)Cursor.Position.X;
-            uint Y = (uint)Cursor.Position.Y;
+            var X = (uint)Cursor.Position.X;
+            var Y = (uint)Cursor.Position.Y;
             mouse_event(MOUSEEVENTF_LEFTDOWN, X, Y, 0, 0);
             Thread.Sleep(20);
             mouse_event(MOUSEEVENTF_LEFTUP, X, Y, 0, 0);
@@ -181,7 +180,7 @@ namespace LOLInstalocker
                 TIMER.Stop();
                 running = false;
                 this.BackColor = Color.Maroon;
-                Thread.Sleep(650);
+                Thread.Sleep(300);
                 Run();
             }
         }
