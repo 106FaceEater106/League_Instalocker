@@ -72,7 +72,7 @@ namespace LOLInstalocker
 
             //Choose Champ
             MoveCursor(new Point(705, 324));
-            for (var i = 0; i < 10; i++) { DoMouseClick(); }
+            for (var i = 0; i < 20; i++) { DoMouseClick(); }
             Thread.Sleep(100);
 
             //Lock In
